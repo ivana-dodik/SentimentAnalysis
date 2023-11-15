@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+</head>
+
+<body>
+    <div class="container bg-white bg-opacity-75">
+        <h1 class="title">Sentiment Analysis</h1>
+
+        <div class="form-group">
+            <label for="model">Select desired model:</label>
+            <select id="model" name="model" class="form-control">
+                {% for model in models %}
+                <option value="{{ model }}" {% if loop.first %}selected{% endif %}>{{ model }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <hr>
+
+        <h3>Manual</h3>
+
+        <div class="form-group">
+            <label for="text">Enter some text:</label>
+            <textarea id="text" rows="4" cols="50" class="form-control mb-1"></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="predictSentiment()">Predict Sentiment</button>
+
+        <p>Predicted score: <span id="score">N/A</span></p>
+        <p>Label: <span id="label">N/A</span></p>
+
+        <hr>
+
+        <h3>RSS Feed</h3>
+
+        <div class="form-group">
+            <label for="rss-url">RSS Feed URL:</label>
+            <input type="text" id="rss-url" class="form-control mb-1">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="predictSentimentFromRSS()">Predict Sentiment</button>
+
+        <div id="chart-container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Titles</p>
+                    <canvas id="titles" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-4">
+                    <p>Descriptions</p>
+                    <canvas id="descriptions" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-4">
+                    <p>Using Both</p>
+                    <canvas id="both" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{url_for('static', filename='bootstrap.bundle.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
+</body>
+
+</html>

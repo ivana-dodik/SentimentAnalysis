@@ -1,0 +1,15 @@
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.neutral {
+    color: gray;
+}
+
+body {
+    background-image: url("/static/images/background.jpg");
+}
